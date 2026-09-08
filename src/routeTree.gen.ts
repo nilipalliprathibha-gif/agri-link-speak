@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as MarketRouteImport } from './routes/market'
+import { Route as SecondaryRouteImport } from './routes/secondary'
+import { Route as CropIdRouteImport } from './routes/crop.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketRoute = MarketRouteImport.update({
+  id: '/market',
+  path: '/market',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecondaryRoute = SecondaryRouteImport.update({
+  id: '/secondary',
+  path: '/secondary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CropIdRoute = CropIdRouteImport.update({
+  id: '/crop/$id',
+  path: '/crop/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/market': typeof MarketRoute
+  '/secondary': typeof SecondaryRoute
+  '/crop/$id': typeof CropIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/market': typeof MarketRoute
+  '/secondary': typeof SecondaryRoute
+  '/crop/$id': typeof CropIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/market': typeof MarketRoute
+  '/secondary': typeof SecondaryRoute
+  '/crop/$id': typeof CropIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/auth' | '/market' | '/secondary' | '/crop/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/auth' | '/market' | '/secondary' | '/crop/$id'
+  id: '__root__' | '/' | '/auth' | '/market' | '/secondary' | '/crop/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  MarketRoute: typeof MarketRoute
+  SecondaryRoute: typeof SecondaryRoute
+  CropIdRoute: typeof CropIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/market': {
+      id: '/market'
+      path: '/market'
+      fullPath: '/market'
+      preLoaderRoute: typeof MarketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/secondary': {
+      id: '/secondary'
+      path: '/secondary'
+      fullPath: '/secondary'
+      preLoaderRoute: typeof SecondaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crop/$id': {
+      id: '/crop/$id'
+      path: '/crop/$id'
+      fullPath: '/crop/$id'
+      preLoaderRoute: typeof CropIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  MarketRoute: MarketRoute,
+  SecondaryRoute: SecondaryRoute,
+  CropIdRoute: CropIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
