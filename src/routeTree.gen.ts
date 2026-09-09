@@ -11,9 +11,18 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BulkRouteImport } from './routes/bulk'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as MarketRouteImport } from './routes/market'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as SecondaryRouteImport } from './routes/secondary'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as CropIdRouteImport } from './routes/crop.$id'
+import { Route as FarmerIndexRouteImport } from './routes/farmer.index'
+import { Route as FarmerAddCropRouteImport } from './routes/farmer.add-crop'
+import { Route as FarmerCropsRouteImport } from './routes/farmer.crops'
+import { Route as FarmerOrdersRouteImport } from './routes/farmer.orders'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,9 +34,29 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BulkRoute = BulkRouteImport.update({
+  id: '/bulk',
+  path: '/bulk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketRoute = MarketRouteImport.update({
   id: '/market',
   path: '/market',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SecondaryRoute = SecondaryRouteImport.update({
@@ -35,48 +64,152 @@ const SecondaryRoute = SecondaryRouteImport.update({
   path: '/secondary',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CropIdRoute = CropIdRouteImport.update({
   id: '/crop/$id',
   path: '/crop/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmerIndexRoute = FarmerIndexRouteImport.update({
+  id: '/farmer/',
+  path: '/farmer/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmerAddCropRoute = FarmerAddCropRouteImport.update({
+  id: '/farmer/add-crop',
+  path: '/farmer/add-crop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmerCropsRoute = FarmerCropsRouteImport.update({
+  id: '/farmer/crops',
+  path: '/farmer/crops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmerOrdersRoute = FarmerOrdersRouteImport.update({
+  id: '/farmer/orders',
+  path: '/farmer/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/bulk': typeof BulkRoute
+  '/cart': typeof CartRoute
   '/market': typeof MarketRoute
+  '/notifications': typeof NotificationsRoute
+  '/orders': typeof OrdersRoute
   '/secondary': typeof SecondaryRoute
+  '/settings': typeof SettingsRoute
   '/crop/$id': typeof CropIdRoute
+  '/farmer/add-crop': typeof FarmerAddCropRoute
+  '/farmer/crops': typeof FarmerCropsRoute
+  '/farmer/orders': typeof FarmerOrdersRoute
+  '/farmer/': typeof FarmerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/bulk': typeof BulkRoute
+  '/cart': typeof CartRoute
   '/market': typeof MarketRoute
+  '/notifications': typeof NotificationsRoute
+  '/orders': typeof OrdersRoute
   '/secondary': typeof SecondaryRoute
+  '/settings': typeof SettingsRoute
   '/crop/$id': typeof CropIdRoute
+  '/farmer/add-crop': typeof FarmerAddCropRoute
+  '/farmer/crops': typeof FarmerCropsRoute
+  '/farmer/orders': typeof FarmerOrdersRoute
+  '/farmer': typeof FarmerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/bulk': typeof BulkRoute
+  '/cart': typeof CartRoute
   '/market': typeof MarketRoute
+  '/notifications': typeof NotificationsRoute
+  '/orders': typeof OrdersRoute
   '/secondary': typeof SecondaryRoute
+  '/settings': typeof SettingsRoute
   '/crop/$id': typeof CropIdRoute
+  '/farmer/add-crop': typeof FarmerAddCropRoute
+  '/farmer/crops': typeof FarmerCropsRoute
+  '/farmer/orders': typeof FarmerOrdersRoute
+  '/farmer/': typeof FarmerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/market' | '/secondary' | '/crop/$id'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/bulk'
+    | '/cart'
+    | '/market'
+    | '/notifications'
+    | '/orders'
+    | '/secondary'
+    | '/settings'
+    | '/crop/$id'
+    | '/farmer/add-crop'
+    | '/farmer/crops'
+    | '/farmer/orders'
+    | '/farmer/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/market' | '/secondary' | '/crop/$id'
-  id: '__root__' | '/' | '/auth' | '/market' | '/secondary' | '/crop/$id'
+  to:
+    | '/'
+    | '/auth'
+    | '/bulk'
+    | '/cart'
+    | '/market'
+    | '/notifications'
+    | '/orders'
+    | '/secondary'
+    | '/settings'
+    | '/crop/$id'
+    | '/farmer/add-crop'
+    | '/farmer/crops'
+    | '/farmer/orders'
+    | '/farmer'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/bulk'
+    | '/cart'
+    | '/market'
+    | '/notifications'
+    | '/orders'
+    | '/secondary'
+    | '/settings'
+    | '/crop/$id'
+    | '/farmer/add-crop'
+    | '/farmer/crops'
+    | '/farmer/orders'
+    | '/farmer/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  BulkRoute: typeof BulkRoute
+  CartRoute: typeof CartRoute
   MarketRoute: typeof MarketRoute
+  NotificationsRoute: typeof NotificationsRoute
+  OrdersRoute: typeof OrdersRoute
   SecondaryRoute: typeof SecondaryRoute
+  SettingsRoute: typeof SettingsRoute
   CropIdRoute: typeof CropIdRoute
+  FarmerAddCropRoute: typeof FarmerAddCropRoute
+  FarmerCropsRoute: typeof FarmerCropsRoute
+  FarmerOrdersRoute: typeof FarmerOrdersRoute
+  FarmerIndexRoute: typeof FarmerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -95,11 +228,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bulk': {
+      id: '/bulk'
+      path: '/bulk'
+      fullPath: '/bulk'
+      preLoaderRoute: typeof BulkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/market': {
       id: '/market'
       path: '/market'
       fullPath: '/market'
       preLoaderRoute: typeof MarketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/secondary': {
@@ -109,11 +270,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecondaryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/crop/$id': {
       id: '/crop/$id'
       path: '/crop/$id'
       fullPath: '/crop/$id'
       preLoaderRoute: typeof CropIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmer/': {
+      id: '/farmer/'
+      path: '/farmer'
+      fullPath: '/farmer/'
+      preLoaderRoute: typeof FarmerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmer/add-crop': {
+      id: '/farmer/add-crop'
+      path: '/farmer/add-crop'
+      fullPath: '/farmer/add-crop'
+      preLoaderRoute: typeof FarmerAddCropRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmer/crops': {
+      id: '/farmer/crops'
+      path: '/farmer/crops'
+      fullPath: '/farmer/crops'
+      preLoaderRoute: typeof FarmerCropsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmer/orders': {
+      id: '/farmer/orders'
+      path: '/farmer/orders'
+      fullPath: '/farmer/orders'
+      preLoaderRoute: typeof FarmerOrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -122,9 +318,18 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  BulkRoute: BulkRoute,
+  CartRoute: CartRoute,
   MarketRoute: MarketRoute,
+  NotificationsRoute: NotificationsRoute,
+  OrdersRoute: OrdersRoute,
   SecondaryRoute: SecondaryRoute,
+  SettingsRoute: SettingsRoute,
   CropIdRoute: CropIdRoute,
+  FarmerAddCropRoute: FarmerAddCropRoute,
+  FarmerCropsRoute: FarmerCropsRoute,
+  FarmerOrdersRoute: FarmerOrdersRoute,
+  FarmerIndexRoute: FarmerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
