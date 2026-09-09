@@ -19,6 +19,10 @@ import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as SecondaryRouteImport } from './routes/secondary'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as CropIdRouteImport } from './routes/crop.$id'
+import { Route as FarmerIndexRouteImport } from './routes/farmer.index'
+import { Route as FarmerAddCropRouteImport } from './routes/farmer.add-crop'
+import { Route as FarmerCropsRouteImport } from './routes/farmer.crops'
+import { Route as FarmerOrdersRouteImport } from './routes/farmer.orders'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +74,26 @@ const CropIdRoute = CropIdRouteImport.update({
   path: '/crop/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FarmerIndexRoute = FarmerIndexRouteImport.update({
+  id: '/farmer/',
+  path: '/farmer/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmerAddCropRoute = FarmerAddCropRouteImport.update({
+  id: '/farmer/add-crop',
+  path: '/farmer/add-crop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmerCropsRoute = FarmerCropsRouteImport.update({
+  id: '/farmer/crops',
+  path: '/farmer/crops',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmerOrdersRoute = FarmerOrdersRouteImport.update({
+  id: '/farmer/orders',
+  path: '/farmer/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +106,10 @@ export interface FileRoutesByFullPath {
   '/secondary': typeof SecondaryRoute
   '/settings': typeof SettingsRoute
   '/crop/$id': typeof CropIdRoute
+  '/farmer/add-crop': typeof FarmerAddCropRoute
+  '/farmer/crops': typeof FarmerCropsRoute
+  '/farmer/orders': typeof FarmerOrdersRoute
+  '/farmer/': typeof FarmerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +122,10 @@ export interface FileRoutesByTo {
   '/secondary': typeof SecondaryRoute
   '/settings': typeof SettingsRoute
   '/crop/$id': typeof CropIdRoute
+  '/farmer/add-crop': typeof FarmerAddCropRoute
+  '/farmer/crops': typeof FarmerCropsRoute
+  '/farmer/orders': typeof FarmerOrdersRoute
+  '/farmer': typeof FarmerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +139,10 @@ export interface FileRoutesById {
   '/secondary': typeof SecondaryRoute
   '/settings': typeof SettingsRoute
   '/crop/$id': typeof CropIdRoute
+  '/farmer/add-crop': typeof FarmerAddCropRoute
+  '/farmer/crops': typeof FarmerCropsRoute
+  '/farmer/orders': typeof FarmerOrdersRoute
+  '/farmer/': typeof FarmerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +157,10 @@ export interface FileRouteTypes {
     | '/secondary'
     | '/settings'
     | '/crop/$id'
+    | '/farmer/add-crop'
+    | '/farmer/crops'
+    | '/farmer/orders'
+    | '/farmer/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +173,10 @@ export interface FileRouteTypes {
     | '/secondary'
     | '/settings'
     | '/crop/$id'
+    | '/farmer/add-crop'
+    | '/farmer/crops'
+    | '/farmer/orders'
+    | '/farmer'
   id:
     | '__root__'
     | '/'
@@ -145,6 +189,10 @@ export interface FileRouteTypes {
     | '/secondary'
     | '/settings'
     | '/crop/$id'
+    | '/farmer/add-crop'
+    | '/farmer/crops'
+    | '/farmer/orders'
+    | '/farmer/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +206,10 @@ export interface RootRouteChildren {
   SecondaryRoute: typeof SecondaryRoute
   SettingsRoute: typeof SettingsRoute
   CropIdRoute: typeof CropIdRoute
+  FarmerAddCropRoute: typeof FarmerAddCropRoute
+  FarmerCropsRoute: typeof FarmerCropsRoute
+  FarmerOrdersRoute: typeof FarmerOrdersRoute
+  FarmerIndexRoute: typeof FarmerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +284,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CropIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/farmer/': {
+      id: '/farmer/'
+      path: '/farmer'
+      fullPath: '/farmer/'
+      preLoaderRoute: typeof FarmerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmer/add-crop': {
+      id: '/farmer/add-crop'
+      path: '/farmer/add-crop'
+      fullPath: '/farmer/add-crop'
+      preLoaderRoute: typeof FarmerAddCropRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmer/crops': {
+      id: '/farmer/crops'
+      path: '/farmer/crops'
+      fullPath: '/farmer/crops'
+      preLoaderRoute: typeof FarmerCropsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmer/orders': {
+      id: '/farmer/orders'
+      path: '/farmer/orders'
+      fullPath: '/farmer/orders'
+      preLoaderRoute: typeof FarmerOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -246,6 +326,10 @@ const rootRouteChildren: RootRouteChildren = {
   SecondaryRoute: SecondaryRoute,
   SettingsRoute: SettingsRoute,
   CropIdRoute: CropIdRoute,
+  FarmerAddCropRoute: FarmerAddCropRoute,
+  FarmerCropsRoute: FarmerCropsRoute,
+  FarmerOrdersRoute: FarmerOrdersRoute,
+  FarmerIndexRoute: FarmerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
