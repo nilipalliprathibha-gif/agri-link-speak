@@ -15,6 +15,7 @@ export type CropRow = {
   condition: string | null;
   intended_use: string | null;
   labels: string[];
+  description?: string | null;
   location_name: string | null;
   profiles?: { id: string; name: string; trust_score: number; badges: string[] } | null;
 };

@@ -7,7 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/market")({
-  validateSearch: (search: Record<string, unknown>) => ({ q: String(search["q"] ?? "") }),
+  validateSearch: (search: Record<string, unknown>): { q?: string } =>
+    search["q"] ? { q: String(search["q"]) } : {},
   head: () => ({
     meta: [
       { title: "Fresh crops near you — FarmDirect" },
@@ -46,7 +47,7 @@ export function useAveragePrices() {
 function Market() {
   const { q } = Route.useSearch();
   const { t } = useI18n();
-  const [query, setQuery] = useState(q);
+  const [query, setQuery] = useState(q ?? "");
   const [sort, setSort] = useState<"recent" | "price" | "quantity">("recent");
   const averages = useAveragePrices();
 
@@ -65,7 +66,7 @@ function Market() {
   });
 
   const visible = useMemo(() => {
-    const term = (query || q).trim().toLowerCase();
+    const term = (query || q || "").trim().toLowerCase();
     let rows = crops.data ?? [];
     if (term) rows = rows.filter((c) => c.name.toLowerCase().includes(term));
     if (sort === "price") rows = [...rows].sort((a, b) => a.price - b.price);

@@ -48,15 +48,16 @@ function AddCrop() {
     intended_use: "",
   });
 
-  const dictate = async (field: "name" | "quantity" | "price" | "location_name") => {
+  const dictate = (field: "name" | "quantity" | "price" | "location_name") => {
     if (settings.voice) speak(t("listening"), speechLocale);
-    const heard = await listenOnce(speechLocale);
-    if (!heard) return;
-    const numeric = heard.replace(/[^\d.]/g, "");
-    setForm((prev) => ({
-      ...prev,
-      [field]: field === "quantity" || field === "price" ? numeric : heard,
-    }));
+    const handle = listenOnce(speechLocale, (heard) => {
+      const numeric = heard.replace(/[^\d.]/g, "");
+      setForm((prev) => ({
+        ...prev,
+        [field]: field === "quantity" || field === "price" ? numeric : heard,
+      }));
+    });
+    if (!handle) toast.error("Voice input is not supported on this device.");
   };
 
   const save = async () => {
