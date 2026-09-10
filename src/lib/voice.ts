@@ -87,8 +87,8 @@ type SpeechRecognitionLike = {
 /* ---------------- intent parsing ---------------- */
 
 export type VoiceIntent =
-  | { kind: "search"; crop?: string }
-  | { kind: "order"; crop?: string; quantity?: number }
+  | { kind: "search"; crop?: string | undefined }
+  | { kind: "order"; crop?: string | undefined; quantity?: number | undefined }
   | { kind: "orderStatus" }
   | { kind: "complaint" }
   | { kind: "addCrop" }

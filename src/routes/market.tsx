@@ -7,7 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/market")({
-  validateSearch: (search: Record<string, unknown>) => ({ q: String(search["q"] ?? "") }),
+  validateSearch: (search: Record<string, unknown>): { q?: string } =>
+    search["q"] ? { q: String(search["q"]) } : {},
   head: () => ({
     meta: [
       { title: "Fresh crops near you — FarmDirect" },
